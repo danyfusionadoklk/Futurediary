@@ -1,5 +1,8 @@
-name: Build Flutter APK
-
+- name: Upload APK
+  uses: actions/upload-artifact@v2
+  with:
+    name: app-release.apk
+    path: build/app/outputs/flutter-apk/app-release.apk
 on:
   push:
     branches:
