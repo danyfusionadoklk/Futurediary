@@ -1,6 +1,5 @@
-name: futuro_diary
-description: Diario futurista con entradas aleatorias.
-publish_to: 'none'
+name: diario_app
+description: Diario del futuro en español con entradas aleatorias.
 version: 1.0.0+1
 
 environment:
@@ -9,6 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.2
 
 flutter:
   uses-material-design: true
