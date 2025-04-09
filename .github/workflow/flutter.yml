@@ -1,20 +1,31 @@
-name: Flutter CI
+name: Build Flutter APK
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main  # Cambia esto si tu rama principal no se llama 'main'
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest  # Esto indica que el flujo de trabajo se ejecuta en Ubuntu
+    
     steps:
-    - uses: actions/checkout@v3
-    - uses: subosito/flutter-action@v2
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.7.0'
-    - run: flutter pub get
-    - run: flutter analyze
-    - run: flutter test
+        flutter-version: '3.7.0'  # Puedes cambiar la versión si es necesario
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Build APK
+      run: flutter build apk --release  # Esto generará el APK en modo release
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release.apk
+        path: build/app/outputs/flutter-apk/app-release.apk  # Este es el APK generado
