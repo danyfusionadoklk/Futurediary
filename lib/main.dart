@@ -2,71 +2,67 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 void main() {
-  runApp(FuturoDiaryApp());
+  runApp(DiarioApp());
 }
 
-class FuturoDiaryApp extends StatelessWidget {
+class DiarioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Futuro Diary',
+      title: 'Diario del Futuro',
       theme: ThemeData.dark(),
-      home: FuturoDiaryScreen(),
-      debugShowCheckedModeBanner: false,
+      home: DiarioFuturo(),
     );
   }
 }
 
-class FuturoDiaryScreen extends StatefulWidget {
+class DiarioFuturo extends StatefulWidget {
   @override
-  _FuturoDiaryScreenState createState() => _FuturoDiaryScreenState();
+  _DiarioFuturoState createState() => _DiarioFuturoState();
 }
 
-class _FuturoDiaryScreenState extends State<FuturoDiaryScreen> {
-  final List<String> futureEntries = [
-    "2045: Las ciudades flotantes comienzan a operar.",
-    "2099: Primer contacto confirmado con una civilización interestelar.",
-    "3020: La humanidad se convierte en una mente colectiva.",
-    "2178: Se establece la primera colonia estable en Titán.",
-    "2301: La IA toma el control de las decisiones políticas.",
-    "2250: Vuelve la escritura a mano como arte sagrado.",
-    "2133: Una tormenta solar reinicia la tecnología global."
+class _DiarioFuturoState extends State<DiarioFuturo> {
+  final List<String> entradas = [
+    "2045: La humanidad ha colonizado Marte.",
+    "2101: Las máquinas sienten emociones.",
+    "2028: El primer presidente IA gobierna Europa.",
+    "2077: Los recuerdos pueden almacenarse digitalmente.",
+    "2033: Se descubre vida en una luna de Júpiter.",
   ];
 
-  String currentEntry = "";
+  String entradaActual = "";
 
-  void generateRandomEntry() {
+  void generarEntrada() {
     final random = Random();
     setState(() {
-      currentEntry = futureEntries[random.nextInt(futureEntries.length)];
+      entradaActual = entradas[random.nextInt(entradas.length)];
     });
   }
 
   @override
   void initState() {
     super.initState();
-    generateRandomEntry();
+    generarEntrada();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Futuro Diary')),
+      appBar: AppBar(title: Text('Diario del Futuro')),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(currentEntry, textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: generateRandomEntry,
-                child: Text('Ver otra entrada del futuro'),
-              )
-            ],
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            entradaActual,
+            style: TextStyle(fontSize: 24),
+            textAlign: TextAlign.center,
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: generarEntrada,
+        child: Icon(Icons.refresh),
+        tooltip: 'Nueva entrada',
       ),
     );
   }
